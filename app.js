@@ -130,6 +130,7 @@ function render() {
 }
 
 render();
+resetBodies();
 
 addButton.addEventListener("click", () => addBody());
 resetButton.addEventListener("click", resetBodies);
