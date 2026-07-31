@@ -31,6 +31,14 @@ function resetBodies() {
   }
 }
 
+function canvasPoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: ((event.clientX - rect.left) / rect.width) * canvas.width,
+    y: ((event.clientY - rect.top) / rect.height) * canvas.height,
+  };
+}
+
 function fadeScene() {
   ctx.fillStyle = "rgba(7, 10, 16, 0.26)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -100,3 +108,7 @@ render();
 
 addButton.addEventListener("click", () => addBody());
 resetButton.addEventListener("click", resetBodies);
+canvas.addEventListener("pointerdown", (event) => {
+  const point = canvasPoint(event);
+  addBody(point.x, point.y);
+});

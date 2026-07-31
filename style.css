@@ -78,4 +78,5 @@ canvas {
   aspect-ratio: 16 / 9;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #070a10;
+  cursor: crosshair;
 }
