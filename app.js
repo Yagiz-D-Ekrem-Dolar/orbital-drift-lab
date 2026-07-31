@@ -62,9 +62,25 @@ function stepParticle(particle) {
 }
 
 function drawParticle(particle) {
-  ctx.fillStyle = particle.color;
+  const glow = ctx.createRadialGradient(
+    particle.x,
+    particle.y,
+    0,
+    particle.x,
+    particle.y,
+    particle.radius * 2.4
+  );
+  glow.addColorStop(0, particle.color);
+  glow.addColorStop(0.46, particle.color);
+  glow.addColorStop(1, "rgba(255, 255, 255, 0)");
+  ctx.fillStyle = glow;
   ctx.beginPath();
-  ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+  ctx.arc(particle.x, particle.y, particle.radius * 2.4, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#fff9ea";
+  ctx.beginPath();
+  ctx.arc(particle.x - particle.radius * 0.28, particle.y - particle.radius * 0.28, particle.radius * 0.24, 0, Math.PI * 2);
   ctx.fill();
 }
 

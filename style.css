@@ -81,7 +81,12 @@ canvas {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #070a10;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    #070a10;
+  background-size: 48px 48px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
   cursor: crosshair;
 }
 
@@ -98,4 +103,18 @@ canvas {
   font-size: 0.9rem;
   line-height: 1.45;
   backdrop-filter: blur(10px);
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100vw - 20px, 1100px);
+    padding: 18px 0;
+  }
+
+  #stats {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    min-width: 0;
+  }
 }
