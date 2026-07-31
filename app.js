@@ -37,12 +37,40 @@ function drawParticle(particle) {
   ctx.fill();
 }
 
+function resolveParticleHits() {
+  for (let i = 0; i < particles.length; i += 1) {
+    for (let j = i + 1; j < particles.length; j += 1) {
+      const a = particles[i];
+      const b = particles[j];
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const distance = Math.hypot(dx, dy);
+      const minDistance = a.radius + b.radius;
+
+      if (distance > 0 && distance < minDistance) {
+        const nx = dx / distance;
+        const ny = dy / distance;
+        const overlap = (minDistance - distance) / 2;
+        a.x -= nx * overlap;
+        a.y -= ny * overlap;
+        b.x += nx * overlap;
+        b.y += ny * overlap;
+
+        const push = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+        a.vx -= push * nx * 0.5;
+        a.vy -= push * ny * 0.5;
+        b.vx += push * nx * 0.5;
+        b.vy += push * ny * 0.5;
+      }
+    }
+  }
+}
+
 function render() {
   fadeScene();
-  particles.forEach((particle) => {
-    stepParticle(particle);
-    drawParticle(particle);
-  });
+  particles.forEach(stepParticle);
+  resolveParticleHits();
+  particles.forEach(drawParticle);
   requestAnimationFrame(render);
 }
 
