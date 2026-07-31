@@ -2,6 +2,7 @@ const canvas = document.querySelector("#world");
 const ctx = canvas.getContext("2d");
 const addButton = document.querySelector("#add");
 const resetButton = document.querySelector("#reset");
+const stats = document.querySelector("#stats");
 const gravity = 0.18;
 const bounce = 0.86;
 
@@ -96,11 +97,19 @@ function resolveParticleHits() {
   }
 }
 
+function updateStats() {
+  const energy = particles.reduce((total, particle) => {
+    return total + Math.hypot(particle.vx, particle.vy);
+  }, 0);
+  stats.innerHTML = `Bodies: ${particles.length}<br>Motion: ${energy.toFixed(1)}`;
+}
+
 function render() {
   fadeScene();
   particles.forEach(stepParticle);
   resolveParticleHits();
   particles.forEach(drawParticle);
+  updateStats();
   requestAnimationFrame(render);
 }
 

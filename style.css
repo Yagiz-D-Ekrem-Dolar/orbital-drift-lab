@@ -72,6 +72,10 @@ button:hover {
   background: #71e2c2;
 }
 
+.stage {
+  position: relative;
+}
+
 canvas {
   display: block;
   width: 100%;
@@ -79,4 +83,19 @@ canvas {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #070a10;
   cursor: crosshair;
+}
+
+#stats {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  min-width: 170px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: rgba(8, 9, 13, 0.72);
+  color: #dce7ef;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  backdrop-filter: blur(10px);
 }
