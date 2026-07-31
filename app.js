@@ -9,6 +9,11 @@ const particles = [
   { x: 700, y: 160, vx: -0.9, vy: 1.4, radius: 18, color: "#ff7a59" },
 ];
 
+function fadeScene() {
+  ctx.fillStyle = "rgba(7, 10, 16, 0.26)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
 function stepParticle(particle) {
   particle.vy += gravity;
   particle.x += particle.vx;
@@ -33,7 +38,7 @@ function drawParticle(particle) {
 }
 
 function render() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  fadeScene();
   particles.forEach((particle) => {
     stepParticle(particle);
     drawParticle(particle);
