@@ -1,13 +1,35 @@
 const canvas = document.querySelector("#world");
 const ctx = canvas.getContext("2d");
+const addButton = document.querySelector("#add");
+const resetButton = document.querySelector("#reset");
 const gravity = 0.18;
 const bounce = 0.86;
 
-const particles = [
+const palette = ["#71e2c2", "#f6c85f", "#ff7a59", "#8bd3ff", "#f27cc2"];
+
+let particles = [
   { x: 260, y: 180, vx: 2.4, vy: -0.7, radius: 15, color: "#71e2c2" },
   { x: 510, y: 240, vx: -1.5, vy: 0.9, radius: 24, color: "#f6c85f" },
   { x: 700, y: 160, vx: -0.9, vy: 1.4, radius: 18, color: "#ff7a59" },
 ];
+
+function addBody(x = Math.random() * canvas.width, y = 70) {
+  particles.push({
+    x,
+    y,
+    vx: Math.random() * 5 - 2.5,
+    vy: Math.random() * -3,
+    radius: 12 + Math.random() * 18,
+    color: palette[Math.floor(Math.random() * palette.length)],
+  });
+}
+
+function resetBodies() {
+  particles = [];
+  for (let i = 0; i < 5; i += 1) {
+    addBody(170 + i * 150, 90 + i * 16);
+  }
+}
 
 function fadeScene() {
   ctx.fillStyle = "rgba(7, 10, 16, 0.26)";
@@ -75,3 +97,6 @@ function render() {
 }
 
 render();
+
+addButton.addEventListener("click", () => addBody());
+resetButton.addEventListener("click", resetBodies);
